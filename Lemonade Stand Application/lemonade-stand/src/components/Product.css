@@ -1,0 +1,15 @@
+.Product {
+    display: flex;
+    color: #000;
+}
+
+.Product>h2 {
+    width: 60%;
+}
+
+.Count {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
