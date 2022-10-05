@@ -5,9 +5,9 @@ import Button from "../../components/Button"
 import Card from "../../components/Card"
 import Fill from "../../components/Fill"
 import Glass from "../../components/Glass"
-import IceCube from "../../components/IceCube"
 import Liquid from "../../components/Liquid"
 import Product from "../../components/Product"
+import IceBox from "../../components/IceBox"
 
 const StyledHome = styled.div`
     width: 100vw;
@@ -17,13 +17,7 @@ const StyledHome = styled.div`
     align-items: center;
     justify-content: space-evenly;
 `
-const IceBox = styled.div`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-wrap: wrap-reverse;
-`
+
 
 
 
@@ -117,15 +111,7 @@ const Home = () => {
                     opacity='70%'
                     percent={calcPercent(products[1].amount, products[1].max, 30)}
                 />
-                <IceBox>
-                    {Array(products[2].amount)
-                        .fill(undefined)
-                        .map((_, idx) => (
-                            <IceCube key={idx} />
-                        ))
-
-                    }
-                </IceBox>
+                <IceBox iceCubes={products[2].amount} />
             </Glass>
             <Card>
                 {products.map((product, idx) => (
