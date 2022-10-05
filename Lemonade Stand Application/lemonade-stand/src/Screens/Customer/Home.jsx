@@ -1,13 +1,16 @@
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import styled from "styled-components"
-import Button from "../../components/Button"
 
+import { ReactComponent as CartSVG } from '../../assets/cart.svg'
+
+import Button from "../../components/Button"
 import Card from "../../components/Card"
 import Fill from "../../components/Fill"
 import Glass from "../../components/Glass"
 import Liquid from "../../components/Liquid"
 import Product from "../../components/Product"
 import IceBox from "../../components/IceBox"
+import Cart from "../../components/CartIcon"
 
 const StyledHome = styled.div`
     width: 100vw;
@@ -97,34 +100,37 @@ const Home = () => {
 
 
     return (
-        <StyledHome>
-            <h1>Total Price {calcTotalPrice()}</h1>
-            <Glass>
-                <Liquid
-                    bg='#FFc85c'
-                    percent={calcPercent(products[0].amount, products[0].max)}
-                    backFill='#FFC85C'
-                    frontFill='#FFD974'
-                />
-                <Fill
-                    bg='#fff'
-                    opacity='70%'
-                    percent={calcPercent(products[1].amount, products[1].max, 30)}
-                />
-                <IceBox iceCubes={products[2].amount} />
-            </Glass>
-            <Card>
-                {products.map((product, idx) => (
-                    <Product
-                        key={product.name + idx}
-                        {...product}
-                        increment={() => incrementProduct(product.name)}
-                        decrement={() => decrementProduct(product.name)}
+        <Fragment>
+            <StyledHome>
+                <Cart to='/cart'><CartSVG /></Cart>
+                <h1>Total Price {calcTotalPrice()}</h1>
+                <Glass>
+                    <Liquid
+                        bg='#FFc85c'
+                        percent={calcPercent(products[0].amount, products[0].max)}
+                        backFill='#FFC85C'
+                        frontFill='#FFD974'
                     />
-                ))}
-            </Card>
-            <Button w='200px' h='50px' bg='#F96E46'>Add to Cart</Button>
-        </StyledHome>
+                    <Fill
+                        bg='#fff'
+                        opacity='70%'
+                        percent={calcPercent(products[1].amount, products[1].max, 30)}
+                    />
+                    <IceBox iceCubes={products[2].amount} />
+                </Glass>
+                <Card>
+                    {products.map((product, idx) => (
+                        <Product
+                            key={product.name + idx}
+                            {...product}
+                            increment={() => incrementProduct(product.name)}
+                            decrement={() => decrementProduct(product.name)}
+                        />
+                    ))}
+                </Card>
+                <Button w='200px' h='50px' bg='#F96E46'>Add to Cart</Button>
+            </StyledHome>
+        </Fragment>
     )
 }
 
