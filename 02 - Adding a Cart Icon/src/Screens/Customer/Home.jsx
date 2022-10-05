@@ -11,6 +11,7 @@ import Liquid from "../../components/Liquid"
 import Product from "../../components/Product"
 import IceBox from "../../components/IceBox"
 import Cart from "../../components/CartIcon"
+import { Route } from "react-router-dom"
 
 const StyledHome = styled.div`
     width: 100vw;
@@ -101,8 +102,9 @@ const Home = () => {
 
     return (
         <Fragment>
+            <Route path='/cart' render={() => <h1>Cart Page!</h1>} />
             <StyledHome>
-                <Cart to='/cart'><CartSVG /></Cart>
+                <Cart to='/cart' />
                 <h1>Total Price {calcTotalPrice()}</h1>
                 <Glass>
                     <Liquid
