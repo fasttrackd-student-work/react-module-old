@@ -8,8 +8,10 @@ import Glass from "../../components/Glass"
 import Liquid from "../../components/Liquid"
 import Product from "../../components/Product"
 import IceBox from "../../components/IceBox"
-import Cart from "../../components/CartIcon"
-import { Route } from "react-router-dom"
+import CartIcon from "../../components/CartIcon"
+import { Link, Route } from "react-router-dom"
+import SideBar from "../../components/SideBar"
+import Backdrop from "../../components/Backdrop"
 
 const StyledHome = styled.div`
     width: 100vw;
@@ -100,9 +102,18 @@ const Home = () => {
 
     return (
         <Fragment>
-            <Route path='/cart' render={() => <h1>Cart Page!</h1>} />
+            <Route path='/cart' render={() =>
+                <Fragment>
+                    <Backdrop to='/' />
+                    <SideBar>
+                        <Link to='/'>X</Link>
+                        <h1>Cart Page!</h1>
+                    </SideBar>
+                </Fragment>
+            } />
+
             <StyledHome>
-                <Cart to='/cart' />
+                <CartIcon to='/cart' />
                 <h1>Total Price {calcTotalPrice()}</h1>
                 <Glass>
                     <Liquid

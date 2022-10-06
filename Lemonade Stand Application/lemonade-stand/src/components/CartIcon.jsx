@@ -11,16 +11,17 @@ const StyledCart = styled(Link)`
     border-radius: 50%;
     padding: 5px;
     background: #F96E46;
+    z-index: 10;
 `
 const StyledIcon = styled(IconSVG)`
     height: 40px;
     width: 40px;
 `
 
-const Cart = ({ to }) => (
+const CartIcon = ({ to }) => (
     <StyledCart to={to}>
         <StyledIcon />
     </StyledCart>
 )
 
-export default Cart
+export default CartIcon
