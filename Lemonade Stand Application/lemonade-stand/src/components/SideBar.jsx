@@ -9,7 +9,9 @@ const SideBar = styled.div`
     background: #fff;
     z-index: 200;
     border-left: 2px solid #333;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 export default SideBar

@@ -35,6 +35,7 @@ const OffSet = styled(Fill)`
         0,
         ${({ percent }) => `${percent === 100 ? 110 : percent}%`}
     );
+    transition: transform 0.8s;
 `
 
 

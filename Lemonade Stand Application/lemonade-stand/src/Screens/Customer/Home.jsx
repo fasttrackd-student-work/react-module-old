@@ -12,6 +12,7 @@ import CartIcon from "../../components/CartIcon"
 import { Link, Route } from "react-router-dom"
 import SideBar from "../../components/SideBar"
 import Backdrop from "../../components/Backdrop"
+import CloseButton from "../../components/CloseButton"
 
 const StyledHome = styled.div`
     width: 100vw;
@@ -105,9 +106,15 @@ const Home = () => {
             <Route path='/cart' render={() =>
                 <Fragment>
                     <Backdrop to='/' />
-                    <SideBar>
-                        <Link to='/'>X</Link>
-                        <h1>Cart Page!</h1>
+                    <SideBar >
+                        <CloseButton to='/'>X</CloseButton>
+                        <h1>Cart</h1>
+                        <Card h='70%' w='80%' b='2px solid #ccc' br='25px'>
+                            <p>Item 1</p>
+                            <p>Item 2</p>
+                        </Card>
+                        <h2>Total Price $5.00</h2>
+                        <Button w='80%' h='50px' bg='#F96E46'>Checkout</Button>
                     </SideBar>
                 </Fragment>
             } />
@@ -129,7 +136,7 @@ const Home = () => {
                     />
                     <IceBox iceCubes={products[2].amount} />
                 </Glass>
-                <Card>
+                <Card bg='#16697a' b='3px solid #333' br='50px' c='#ebebd3' h='300px' w='400px'>
                     {products.map((product, idx) => (
                         <Product
                             key={product.name + idx}
