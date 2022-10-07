@@ -14,7 +14,7 @@ const Cart = ({ cartItems }) => {
             <SideBar >
                 <CloseButton to='/'>X</CloseButton>
                 <h1>Cart</h1>
-                <Card h='70%' w='90%' b='2px solid #ccc' br='25px'>
+                <Card h='70%' w='90%' b='2px solid #ccc' br='25px' jc='flex-start'>
                     {cartItems.map((cartItem, idx) => (
                         <CartItem key={idx} {...cartItem}></CartItem>
                     ))}

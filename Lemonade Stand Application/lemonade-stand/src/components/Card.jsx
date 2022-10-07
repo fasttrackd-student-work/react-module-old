@@ -10,7 +10,15 @@ const Card = styled.div`
     margin: ${({ m }) => m};
     display: flex;
     flex-direction: ${({ fd }) => fd ? fd : 'column'};
-    align-items: center;
-    justify-content: center;
+    align-items: ${({ ai }) => ai ? ai : 'center'};
+    justify-content: ${({ jc }) => jc ? jc : 'center'};
+    overflow: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 `
 export default Card
