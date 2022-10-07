@@ -7,8 +7,9 @@ const Card = styled.div`
     border: ${({ b }) => b};
     border-radius: ${({ br }) => br};
     color: ${({ c }) => c};
+    margin: ${({ m }) => m};
     display: flex;
-    flex-direction: column;
+    flex-direction: ${({ fd }) => fd ? fd : 'column'};
     align-items: center;
     justify-content: center;
 `

@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { ReactComponent as IceSVG } from '../assets/ice.svg'
 
 const IceCube = styled(IceSVG)`
-    height: 100px;
-    width: 100px;
+    width: 33%;
     opacity: 50%;
 `
 

@@ -1,29 +1,36 @@
 import styled from "styled-components";
 
-const GlassBack = styled.div`
-    background: rgba(0, 0, 0, .1);
-    border: 1px solid #bbb;
-    border-top: 1px solid #ddd;
+const GlassDiv = styled.div`
     border-radius: 10px;
-    padding: 3px 5px 40px 5px;
+    border: 1px solid #bbb;
 `
-const GlassFront = styled.div`
-    height: 450px;
-    width: 300px;
+
+const Background = styled(GlassDiv)`
+    background: #fff;
+`
+
+const GlassBack = styled(GlassDiv)`
+    background: rgba(0, 0, 0, .1);
+    border-top: 1px solid #ddd;
+    padding: 3px 5px 15% 5px;
+`
+const GlassFront = styled(GlassDiv)`
+    height: ${({ h }) => h};
+    width: ${({ w }) => w};
     background: rgba(255,255,255,.5);
-    border: 1px solid #bbb;
-    border-radius: 10px;
     position: relative;
     overflow: hidden;
 `
 
-const Glass = ({ children }) => {
+const Glass = ({ h, w, children }) => {
     return (
-        <GlassBack>
-            <GlassFront>
-                {children}
-            </GlassFront>
-        </GlassBack>
+        <Background>
+            <GlassBack>
+                <GlassFront h={h} w={w}>
+                    {children}
+                </GlassFront>
+            </GlassBack>
+        </Background>
     )
 }
 

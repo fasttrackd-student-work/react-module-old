@@ -9,10 +9,11 @@ import Liquid from "../../components/Liquid"
 import Product from "../../components/Product"
 import IceBox from "../../components/IceBox"
 import CartIcon from "../../components/CartIcon"
-import { Link, Route } from "react-router-dom"
+import { Route } from "react-router-dom"
 import SideBar from "../../components/SideBar"
 import Backdrop from "../../components/Backdrop"
 import CloseButton from "../../components/CloseButton"
+import CartItem from "../../components/CartItem"
 
 const StyledHome = styled.div`
     width: 100vw;
@@ -23,33 +24,37 @@ const StyledHome = styled.div`
     justify-content: space-evenly;
 `
 
-
+const initialState = [
+    {
+        name: 'Lemon Juice',
+        amount: 0,
+        max: 8,
+        unit: 'oz',
+        price: .30
+    },
+    {
+        name: 'Sugar',
+        amount: 0,
+        max: 12,
+        unit: 'tsp',
+        price: .15
+    },
+    {
+        name: 'Ice Cubes',
+        amount: 0,
+        max: 12,
+        unit: 'cubes',
+        price: .05
+    }
+]
 
 
 const Home = () => {
-    const [products, updateProducts] = useState([
-        {
-            name: 'Lemon Juice',
-            amount: 0,
-            max: 8,
-            unit: 'oz',
-            price: .30
-        },
-        {
-            name: 'Sugar',
-            amount: 0,
-            max: 12,
-            unit: 'tsp',
-            price: .15
-        },
-        {
-            name: 'Ice Cubes',
-            amount: 0,
-            max: 12,
-            unit: 'cubes',
-            price: .05
-        }
-    ])
+    const [products, updateProducts] = useState(initialState)
+
+    const [cartItems, updateCartItems] = useState([])
+
+    console.log(cartItems)
 
     const incrementProduct = name => {
         updateProducts(
@@ -94,12 +99,30 @@ const Home = () => {
     const calcPercent = (amount, max, maxFill = 100) => 100 - (amount / max) * maxFill
 
     const calcTotalPrice = () =>
-        new Intl.NumberFormat(
-            'en-US',
-            { style: 'currency', currency: 'USD' })
-            .format(
-                products.reduce((acc, { amount, price }) => acc + (amount * price), 0))
+        new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        }).format(
+            products.reduce((acc, { amount, price }) => acc + amount * price, 0))
 
+    const handleAddToCart = () => {
+        updateCartItems([
+            ...cartItems,
+            {
+                glass: {
+                    percentLemonJuice: calcPercent(
+                        products[0].amount,
+                        products[0].max,
+                        90
+                    ),
+                    percentSugar: calcPercent(products[1].amount, products[1].max, 30),
+                    numberOfIceCubes: products[2].amount
+                },
+                products,
+                price: products.reduce((acc, { amount, price }) => acc + amount * price, 0)
+            }])
+        updateProducts(initialState)
+    }
 
     return (
         <Fragment>
@@ -109,12 +132,28 @@ const Home = () => {
                     <SideBar >
                         <CloseButton to='/'>X</CloseButton>
                         <h1>Cart</h1>
-                        <Card h='70%' w='80%' b='2px solid #ccc' br='25px'>
-                            <p>Item 1</p>
-                            <p>Item 2</p>
+                        <Card h='70%' w='90%' b='2px solid #ccc' br='25px'>
+                            {cartItems.map((cartItem, idx) => (
+                                <CartItem key={idx} {...cartItem}></CartItem>
+                            ))}
                         </Card>
-                        <h2>Total Price $5.00</h2>
-                        <Button w='80%' h='50px' bg='#F96E46'>Checkout</Button>
+                        <h2>Total Price: {' '}
+                            {new Intl.NumberFormat(
+                                'en-US',
+                                { style: 'currency', currency: 'USD' })
+                                .format(
+                                    cartItems.reduce((acc, { price }) => acc + price,
+                                        0
+                                    )
+                                )}
+                        </h2>
+                        <Button
+                            w='80%'
+                            h='50px'
+                            bg='#F96E46'
+                        >
+                            Checkout
+                        </Button>
                     </SideBar>
                 </Fragment>
             } />
@@ -122,7 +161,7 @@ const Home = () => {
             <StyledHome>
                 <CartIcon to='/cart' />
                 <h1>Total Price {calcTotalPrice()}</h1>
-                <Glass>
+                <Glass h='450px' w='300px'>
                     <Liquid
                         bg='#FFc85c'
                         percent={calcPercent(products[0].amount, products[0].max)}
@@ -146,7 +185,7 @@ const Home = () => {
                         />
                     ))}
                 </Card>
-                <Button w='200px' h='50px' bg='#F96E46'>Add to Cart</Button>
+                <Button w='200px' h='50px' bg='#F96E46' onClick={handleAddToCart}>Add to Cart</Button>
             </StyledHome>
         </Fragment>
     )

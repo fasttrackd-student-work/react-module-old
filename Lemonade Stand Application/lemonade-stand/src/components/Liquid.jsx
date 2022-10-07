@@ -18,7 +18,7 @@ const Wave = styled(WaveSVG)`
     width: 200%;
     position: absolute;
     bottom: 100%;
-    margin: -1px;
+    margin: -2px;
     &.front {
         fill: ${({ frontFill }) => frontFill};
         left: 0;
