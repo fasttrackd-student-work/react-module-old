@@ -12,7 +12,7 @@ const Customer = () => {
 
     useEffect(() => {
         fetch('http://localhost:8080/lemonadestand/1/inventory')
-            .then(data => data.JSON())
+            .then(data => data.json())
             .then(response => updateProducts(
                 response.map(product => (
                     {
@@ -100,7 +100,7 @@ const Customer = () => {
         <Fragment>
             <Route path='/cart' render={() => <Cart cartItems={cartItems} updateCartItems={updateCartItems} />} />
             <Switch>
-                <Route path='/checkout' render={() => <Checkout cartItems={cartItems} />} />
+                <Route path='/checkout' render={() => <Checkout cartItems={cartItems} updateCartItems={updateCartItems} />} />
                 <Route path='/order-success' render={() => <OrderSuccess>
                     <h1>Order Success! We'll see you soon. </h1>
                     <br />
