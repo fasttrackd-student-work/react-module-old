@@ -74,7 +74,11 @@ const Checkout = () => {
     }
 
     const formIsValid = () => {
-        if (!form.firstName.value || !form.lastName.value || !form.email.value || !form.phone.value) {
+        if (!form.firstName.value ||
+            !form.lastName.value ||
+            !form.email.value ||
+            !form.phone.value
+        ) {
             updateFormError({
                 ...formError,
                 isError: true,
@@ -122,15 +126,15 @@ const Checkout = () => {
                 .then(response => {
                     updateForm(initialFormState)
                     dispatch(resetCartItems())
-                    history.push('/order-success')
                 })
+                .then(history.push('/order-success'))
                 .catch(error => console.log(error))
         }
     }
 
     return (
         <StyledCheckout>
-            <BackButton to='/home'>{'<'}Back</BackButton>
+            <BackButton to='/'>{'<'}Back</BackButton>
             <Card
                 h='50%'
                 w='80%'
